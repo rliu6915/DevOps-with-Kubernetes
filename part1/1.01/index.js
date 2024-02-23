@@ -1,7 +1,10 @@
-const genRandomString = () => {
-  const randomHash = Math.random().toString(36).substr(2, 6)
+const crypto = require("crypto")
 
-  console.log(randomHash)
+const genRandomString = () => {
+  const randomString = crypto.randomUUID()
+  // const newDate = new Date()
+
+  console.log(`${new Date()}: ${randomString}`)
 
   setTimeout(genRandomString, 5000)
 }
