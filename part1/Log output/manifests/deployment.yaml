@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: logout-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: logout
+  template:
+    metadata:
+      labels:
+        app: logout
+    spec:
+      containers:
+        - name: gen-random-string
+          image: rliu6915/gen-random-string
