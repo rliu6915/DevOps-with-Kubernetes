@@ -1,4 +1,8 @@
 const crypto = require("crypto")
+const Koa = require('koa')
+
+const app = new Koa()
+const PORT = process.env.PORT || 3000
 
 const genRandomString = () => {
   const randomString = crypto.randomUUID()
@@ -9,4 +13,16 @@ const genRandomString = () => {
   setTimeout(genRandomString, 5000)
 }
 
-genRandomString()
+//const startingString = genRandomString()
+
+app.use(async ctx => {
+  if (ctx.path.includes('favicon.ico')) return
+
+  const stringNow = genRandomString()
+  console.log('--------------------')
+  console.log(`Responding with ${stringNow}`)
+  ctx.body = `${startingString}: ${stringNow}`
+});
+
+//console.log(`Started with ${startingString}`)
+app.listen(PORT)
